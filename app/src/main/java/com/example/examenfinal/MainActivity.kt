@@ -17,45 +17,52 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initRecycler()
-        binding.btnAgregar.setOnClickListener {
-           agregarProducto()
-        }
+        binding.btnAgregar.setOnClickListener { crearProducto() }
     }
-    private  fun initRecycler(){
+
+    private fun initRecycler() {
         adapter = ProductoAdapter(productos)
         binding.rvProductos.layoutManager = LinearLayoutManager(this)
         binding.rvProductos.adapter = adapter
     }
 
-    private fun agregarProducto(){
-        /*
+    private fun crearProducto() {
+        if (!validarCampos()) return
+        val producto = Producto(
+            id = idCounter++,
+            nombre = binding.etNombre.text.toString().trim(),
+            precio = binding.etPrecio.text.toString().trim().toDouble(),
+            descripcion = binding.etDescripcion.text.toString().trim()
+        )
+        productos.add(producto)
+        agregarProductoALista()
+        limpiarCampos()
+    }
+
+    private fun validarCampos(): Boolean {
         val nombre = binding.etNombre.text.toString().trim()
         val precioStr = binding.etPrecio.text.toString().trim()
         val descripcion = binding.etDescripcion.text.toString().trim()
-
-        //crear función para validar producto
-
-        // Validación básica
         if (nombre.isEmpty() || precioStr.isEmpty() || descripcion.isEmpty()) {
             Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show()
-            return@setOnClickListener
+            return false
         }
-
         val precio = precioStr.toDoubleOrNull()
         if (precio == null || precio <= 0) {
             Toast.makeText(this, "Precio inválido", Toast.LENGTH_SHORT).show()
-            return@setOnClickListener
+            return false
         }
+        return true
+    }
 
-        val producto = Producto(idCounter++, nombre, precio, descripcion)
-        productos.add(producto)
+    private fun agregarProductoALista() {
         adapter.notifyItemInserted(productos.size - 1)
+        binding.rvProductos.scrollToPosition(productos.size - 1)
+    }
 
-        // Limpiar campos
+    private fun limpiarCampos() {
         binding.etNombre.text.clear()
         binding.etPrecio.text.clear()
         binding.etDescripcion.text.clear()
-
-         */
     }
 }
