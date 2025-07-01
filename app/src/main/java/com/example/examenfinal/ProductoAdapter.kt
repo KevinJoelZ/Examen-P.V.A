@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.examenfinal.databinding.ItemProductoBinding
-
+//Clase para el adaptador
 class ProductoAdapter(
     private val productos: List<Producto>,
     private val onEditar: (Producto, Int) -> Unit,
@@ -17,7 +17,7 @@ class ProductoAdapter(
         val binding = ItemProductoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ProductoViewHolder(binding)
     }
-
+// Metodo para mostrar los productos
     override fun onBindViewHolder(holder: ProductoViewHolder, position: Int) {
         val producto = productos[position]
         holder.binding.tvNombre.text = producto.nombre
