@@ -16,36 +16,46 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        initRecycler()
+        binding.btnAgregar.setOnClickListener {
+           agregarProducto()
+        }
+    }
+    private  fun initRecycler(){
         adapter = ProductoAdapter(productos)
         binding.rvProductos.layoutManager = LinearLayoutManager(this)
         binding.rvProductos.adapter = adapter
+    }
 
-        binding.btnAgregar.setOnClickListener {
-            val nombre = binding.etNombre.text.toString().trim()
-            val precioStr = binding.etPrecio.text.toString().trim()
-            val descripcion = binding.etDescripcion.text.toString().trim()
+    private fun agregarProducto(){
+        /*
+        val nombre = binding.etNombre.text.toString().trim()
+        val precioStr = binding.etPrecio.text.toString().trim()
+        val descripcion = binding.etDescripcion.text.toString().trim()
 
-            // Validación básica
-            if (nombre.isEmpty() || precioStr.isEmpty() || descripcion.isEmpty()) {
-                Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+        //crear función para validar producto
 
-            val precio = precioStr.toDoubleOrNull()
-            if (precio == null || precio <= 0) {
-                Toast.makeText(this, "Precio inválido", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            val producto = Producto(idCounter++, nombre, precio, descripcion)
-            productos.add(producto)
-            adapter.notifyItemInserted(productos.size - 1)
-
-            // Limpiar campos
-            binding.etNombre.text.clear()
-            binding.etPrecio.text.clear()
-            binding.etDescripcion.text.clear()
+        // Validación básica
+        if (nombre.isEmpty() || precioStr.isEmpty() || descripcion.isEmpty()) {
+            Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show()
+            return@setOnClickListener
         }
+
+        val precio = precioStr.toDoubleOrNull()
+        if (precio == null || precio <= 0) {
+            Toast.makeText(this, "Precio inválido", Toast.LENGTH_SHORT).show()
+            return@setOnClickListener
+        }
+
+        val producto = Producto(idCounter++, nombre, precio, descripcion)
+        productos.add(producto)
+        adapter.notifyItemInserted(productos.size - 1)
+
+        // Limpiar campos
+        binding.etNombre.text.clear()
+        binding.etPrecio.text.clear()
+        binding.etDescripcion.text.clear()
+
+         */
     }
 }
