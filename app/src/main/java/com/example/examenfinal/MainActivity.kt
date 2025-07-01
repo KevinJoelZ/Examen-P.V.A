@@ -21,8 +21,10 @@ class MainActivity : AppCompatActivity() {
            agregarProducto()
         }
     }
-    private  fun initRecycler(){
-        adapter = ProductoAdapter(productos)
+    private fun initRecycler() {
+        adapter = ProductoAdapter(productos) { productoAEliminar ->
+            eliminarProducto(productoAEliminar)
+        }
         binding.rvProductos.layoutManager = LinearLayoutManager(this)
         binding.rvProductos.adapter = adapter
     }
@@ -55,7 +57,13 @@ class MainActivity : AppCompatActivity() {
         binding.etNombre.text.clear()
         binding.etPrecio.text.clear()
         binding.etDescripcion.text.clear()
+        */
+        private fun eliminarProducto(producto: Producto) {
+            val index = productos.indexOf(producto)
+            if (index != -1) {
+                productos.removeAt(index)
+                adapter.notifyItemRemoved(index)
+                Toast.makeText(this, "Producto eliminado", Toast.LENGTH_SHORT).show()
 
-         */
     }
 }
