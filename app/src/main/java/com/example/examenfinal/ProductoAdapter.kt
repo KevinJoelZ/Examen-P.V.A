@@ -5,8 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.examenfinal.databinding.ItemProductoBinding
 
-class ProductoAdapter(private val productos: List<Producto>) :
-    RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder>() {
+class ProductoAdapter(
+    private val productos: List<Producto>,
+    private val onEditar: (Producto, Int) -> Unit,
+    private val onEliminar: (Int) -> Unit
+) : RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder>() {
 
     inner class ProductoViewHolder(val binding: ItemProductoBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -21,12 +24,13 @@ class ProductoAdapter(private val productos: List<Producto>) :
         holder.binding.tvPrecio.text = "Precio: $${producto.precio}"
         holder.binding.tvDescripcion.text = producto.descripcion
 
-        // Aquí coloco el botón eliminar
-        holder.binding.btnEliminar.setOnClickListener { eliminarProducto(producto)
+        holder.binding.btnEditar.setOnClickListener {
+            onEditar(producto, position)
+        }
+        holder.binding.btnEliminar.setOnClickListener {
+            onEliminar(position)
+        }
     }
 
     override fun getItemCount() = productos.size
 }
-
-
-    }
