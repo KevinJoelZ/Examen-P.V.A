@@ -20,6 +20,10 @@ class ProductoAdapter(private val productos: List<Producto>) :
         holder.binding.tvNombre.text = producto.nombre
         holder.binding.tvPrecio.text = "Precio: $${producto.precio}"
         holder.binding.tvDescripcion.text = producto.descripcion
+
+        // Aquí coloco el botón eliminar
+        holder.binding.btnEliminar.setOnClickListener {
+            onEliminarClick(producto)
     }
 
     override fun getItemCount() = productos.size

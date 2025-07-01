@@ -18,53 +18,44 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         initRecycler()
         binding.btnAgregar.setOnClickListener {
-            agregarProducto()
+           agregarProducto()
         }
     }
-
-    private fun initRecycler() {
+    private  fun initRecycler(){
         adapter = ProductoAdapter(productos)
         binding.rvProductos.layoutManager = LinearLayoutManager(this)
         binding.rvProductos.adapter = adapter
     }
 
-    private fun agregarProducto() {
-        if (!validarProducto()) return
-
-        val nombre = binding.etNombre.text.toString().trim()
-        val precio = binding.etPrecio.text.toString().trim().toDouble()
-        val descripcion = binding.etDescripcion.text.toString().trim()
-
-        val producto = Producto(idCounter++, nombre, precio, descripcion)
-        productos.add(producto)
-        leerProductos()
-        limpiarCampos()
-    }
-
-    private fun validarProducto(): Boolean {
+    private fun agregarProducto(){
+        /*
         val nombre = binding.etNombre.text.toString().trim()
         val precioStr = binding.etPrecio.text.toString().trim()
         val descripcion = binding.etDescripcion.text.toString().trim()
 
+        //crear función para validar producto
+
+        // Validación básica
         if (nombre.isEmpty() || precioStr.isEmpty() || descripcion.isEmpty()) {
             Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show()
-            return false
+            return@setOnClickListener
         }
+
         val precio = precioStr.toDoubleOrNull()
         if (precio == null || precio <= 0) {
             Toast.makeText(this, "Precio inválido", Toast.LENGTH_SHORT).show()
-            return false
+            return@setOnClickListener
         }
-        return true
-    }
 
-    private fun leerProductos() {
+        val producto = Producto(idCounter++, nombre, precio, descripcion)
+        productos.add(producto)
         adapter.notifyItemInserted(productos.size - 1)
-    }
 
-    private fun limpiarCampos() {
+        // Limpiar campos
         binding.etNombre.text.clear()
         binding.etPrecio.text.clear()
         binding.etDescripcion.text.clear()
+
+         */
     }
 }
